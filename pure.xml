@@ -1,1 +1,36 @@
-Hello 
+<project name="check" basedir="." default=" ">
+
+<property name="src" value="D:\sony\ant\check\src\main\java"/>
+<property name="test" value="D:\sony\ant\check\src\test"/>
+<property name="class" value="D:\sony\ant\check\src\main\classes"/>
+
+<target name="clean" description="cleaning the directory before the checkout">
+<echo message="cleaning the directory"/>
+<delete dir="${src}"/>
+<delete dir="${test}"/>
+<delete dir="${class}"/>
+</target>
+
+<target name="create" description="creating a new folder" depends="clean">
+<echo>"creating a new folders......"</echo>
+<mkdir dir="${src}"/>
+<mkdir dir="${test}"/>
+<mkdir dir="${class}"/>
+</target>
+
+<target name="copy" description="copying the file" depends="create">
+<echo>"copying the files..."</echo>
+<copy file="D:\sony\git\learngit\java\JUnitHelloWorld.java" todir="${src}"/>
+</target>
+
+<target name="compile" description="compiling the java files" depends="copy">
+<echo>"compiling the java files"</echo>
+<javac srcdir="${src}" destdir="${class}"/>
+</target>
+
+<target name="package" description="packing all the files" depends="compile">
+<echo>"packaging the files.... Java files"</echo>
+<zip basedir="${class}" destfile="${test}/${ant.project.name}.zip"/>
+</target>
+
+</project>
